@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #f9f6f1;
+    }
+    .left {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f9f6f1;
+    }
+    .left img {
+      max-width: 90%;
+      height: auto;
+    }
+    .right {
+      flex: 1;
+      background-color: white;
+      padding: 60px 80px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .hint {
+      font-size: 12px;
+      color: gray;
+      margin-top: 5px;
+    }
+    .remember-row {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+      justify-content: space-between;
+    }
+    .remember-row input {
+      margin-right: 8px;
+    }
+    .login-btn, .oauth-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+    .login-btn {
+      background-color: #0094ff;
+      color: white;
+    }
+    .oauth-btn {
+      background-color: white;
+      border: 2px solid #0094ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .oauth-btn img {
+      width: 20px;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      text-align: center;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: 2px solid black;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="left">
+    <img src="static/img/welcome_img.png" alt="Illustration">
+  </div>
+  <div class="right">
+    <h1>Вход</h1>
+    <form>
+      <label for="email">Эл. почта</label>
+      <input type="email" id="email" placeholder="Эл. почта">
+
+      <label for="password">Пароль</label>
+      <input type="password" id="password" placeholder="Пароль">
+      <div class="hint">Это должна быть комбинация минимум из 8 букв, цифр и символов.</div>
+
+      <div class="remember-row">
+        <label><input type="checkbox"> Запомнить меня</label>
+        <a href="#">Забыли пароль?</a>
+      </div>
+
+      <button type="submit" class="login-btn">Войти</button>
+
+      <button type="button" class="oauth-btn">
+        <img src="static/img/google.png" alt="Google"> Log in with Google
+      </button>
+      <button type="button" class="oauth-btn">
+        <img src="static/img/vk.png" alt="VK"> Log in with VK
+      </button>
+
+      <div class="footer">
+        Нет аккаунта? <a href="registration/register.html">Регистрация</a>
+      </div>
+      <div class="back-btn">
+        <span>&larr;</span> Назад
+      </div>
+    </form>
+  </div>
+</body>
+</html>

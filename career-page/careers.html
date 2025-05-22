@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Выбор профессии</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">Work in Progress</div>
+    <nav>
+      <a href="#">Пройти тест</a>
+      <a href="#">Профессии</a>
+      <a href="#">Таблица лидеров</a>
+      <a href="#">Эксперты</a>
+    </nav>
+    <div class="user-panel">
+      <span class="balance">150 000.73₽</span>
+      <img src="user-icon.png" alt="Профиль" class="icon">
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="filters">
+      <h2>Начните изучение профессий с выбора сферы</h2>
+      <form id="filter-form">
+        <p><strong>Какие способности у вас преобладают?</strong></p>
+        <label><input type="checkbox" name="skills" value="технические"> Технические</label><br>
+        <label><input type="checkbox" name="skills" value="творческие"> Творческие</label><br>
+        <!-- Добавь больше фильтров по желанию -->
+
+        <button type="submit">Применить</button>
+      </form>
+    </aside>
+
+    <section class="results">
+      <div class="result-card">
+        <div class="info">
+          <h3>Техника и инженерия 🛠️</h3>
+          <p>Подходит тем, кто любит разбираться в технике и технологиях.</p>
+          <div class="tags">
+            <span>Робототехника</span><span>Инженерия</span><span>IT</span>
+          </div>
+          <button>Смотреть профессии</button>
+        </div>
+        <div class="match">
+          <div class="circle">91%</div>
+        </div>
+      </div>
+      <!-- Добавь другие карточки -->
+    </section>
+  </main>
+
+  <footer>
+    <p>Work in Progress | All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

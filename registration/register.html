@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <img src="../static/img/welcome_img.png" alt="Welcome image" />
+    </div>
+    <div class="right">
+      <h1>Регистрация</h1>
+      <form>
+        <div class="row">
+          <input type="text" placeholder="Имя" required />
+          <input type="text" placeholder="Фамилия" required />
+        </div>
+        <input type="email" placeholder="Эл. почта" required />
+        <div class="password-wrapper">
+          <input type="password" placeholder="Пароль" id="password" required/>
+        </div>
+        <small>Это должна быть комбинация минимум из 8 букв, цифр и символов.</small>
+        <label class="remember">
+          <input type="checkbox" />
+          Запомнить меня
+        </label>
+        <button type="submit">Зарегистрироваться</button>
+          <button type="button" class="oauth-btn">
+            <img src="../static/img/google.png" alt="Google"> Log in with Google
+          </button>
+          <button type="button" class="oauth-btn">
+            <img src="../static/img/vk.png" alt="VK"> Log in with VK
+          </button>
+        <p class="footer-text">Уже есть аккаунт? <a href="../login.html">Войти</a></p>
+        <button type="button" class="back">← Назад</button>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
