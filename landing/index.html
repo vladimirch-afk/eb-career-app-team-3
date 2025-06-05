@@ -43,55 +43,96 @@
       </div>
     </section>
 
-    <section class="py-12 px-4 max-w-[1440px] mx-auto">
-      <h2 class="text-2xl font-bold text-center mb-8">Наши партнёры</h2>
-      <div id="partner-carousel" class="splide w-full" aria-label="Партнеры">
-        <div class="splide__track">
-          <ul class="splide__list">
-            <li class="splide__slide px-4 border-r border-gray-500 last:border-none">
-              <img src="/static/img/partners/stepik.svg" alt="Stepik" class="h-10 mx-auto" />
-            </li>
-            <li class="splide__slide px-4 border-r border-gray-500 last:border-none">
-              <img src="/static/img/partners/geekbrains.svg" alt="GeekBrains" class="h-10 mx-auto" />
-            </li>
-            <li class="splide__slide px-4 border-r border-gray-500 last:border-none">
-              <img src="/static/img/partners/skillfactory.svg" alt="SkillFactory" class="h-10 mx-auto" />
-            </li>
-            <li class="splide__slide px-4 border-r border-gray-500 last:border-none">
-              <img src="/static/img/partners/practicum.svg" alt="Практикум" class="h-10 mx-auto" />
-            </li>
-            <li class="splide__slide px-4 border-r border-gray-500 last:border-none">
-              <img src="/static/img/partners/skillbox.svg" alt="Skillbox" class="h-10 mx-auto" />
-            </li>
-            <li class="splide__slide px-4 border-r border-gray-500 last:border-none">
-              <img src="/static/img/partners/ucheba.svg" alt="Учеба.ру" class="h-10 mx-auto" />
-            </li>
-          </ul>
-        </div>
-      </div>
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          new Splide('#partner-carousel', {
-            type: 'loop',
-            perPage: 4,
-            gap: '1rem',
-            autoplay: true,
-            interval: 0,
-            speed: 3000,
-            arrows: false,
-            pagination: false,
-            pauseOnHover: false,
-            pauseOnFocus: false,
-            easing: 'linear',
-            breakpoints: {
-              1024: { perPage: 3 },
-              640: { perPage: 2 },
-              480: { perPage: 1 },
-            },
-          }).mount();
-        });
-      </script>
-    </section>
+    <!-- Секция "Наши партнёры" с обновлённым слайдером -->
+<section class="py-12 px-4 max-w-[1440px] mx-auto">
+  <h2 class="text-2xl font-bold text-center mb-8">Наши партнёры</h2>
+  <div id="partner-carousel" class="splide w-full overflow-hidden" aria-label="Партнеры">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide px-4">
+          <div class="partner-item">
+            <img src="/static/img/partners/stepik.svg" alt="Stepik" class="h-12 mx-auto grayscale transition-all duration-300 hover:grayscale-0" />
+          </div>
+        </li>
+        <li class="splide__slide px-4">
+          <div class="partner-item">
+            <img src="/static/img/partners/geekbrains.svg" alt="GeekBrains" class="h-12 mx-auto grayscale transition-all duration-300 hover:grayscale-0" />
+          </div>
+        </li>
+        <li class="splide__slide px-4">
+          <div class="partner-item">
+            <img src="/static/img/partners/skillfactory.svg" alt="SkillFactory" class="h-12 mx-auto grayscale transition-all duration-300 hover:grayscale-0" />
+          </div>
+        </li>
+        <li class="splide__slide px-4">
+          <div class="partner-item">
+            <img src="/static/img/partners/practicum.svg" alt="Практикум" class="h-12 mx-auto grayscale transition-all duration-300 hover:grayscale-0" />
+          </div>
+        </li>
+        <li class="splide__slide px-4">
+          <div class="partner-item">
+            <img src="/static/img/partners/skillbox.svg" alt="Skillbox" class="h-12 mx-auto grayscale transition-all duration-300 hover:grayscale-0" />
+          </div>
+        </li>
+        <li class="splide__slide px-4">
+          <div class="partner-item">
+            <img src="/static/img/partners/ucheba.svg" alt="Учеба.ру" class="h-12 mx-auto grayscale transition-all duration-300 hover:grayscale-0" />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Подключаем Splide.js и инициализируем -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      new Splide('#partner-carousel', {
+        type       : 'loop',
+        perPage    : 4,
+        gap        : '2rem',
+        autoplay   : true,
+        interval   : 0,       // 0 — для непрерывного скролла
+        speed      : 10000,   // 10000 мс — очень медленное прокручивание
+        arrows     : false,
+        pagination : false,
+        pauseOnHover: false,
+        pauseOnFocus: false,
+        easing     : 'linear', // чтобы движение было линейным
+        breakpoints: {
+          1024: { perPage: 3, gap: '1.5rem' },
+          640:  { perPage: 2, gap: '1rem' },
+          480:  { perPage: 1, gap: '1rem' },
+        },
+      }).mount();
+    });
+  </script>
+
+  <!-- Дополнительные стили для более красивого вида -->
+  <style>
+    /* Убираем серые разделительные линии, делаем фон чистым */
+    #partner-carousel .splide__slide {
+      border: none;
+    }
+    /* Контейнер для логотипа: добавляем padding и мягкую тень */
+    .partner-item {
+      background: #ffffff;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    /* При наведении немного увеличиваем */
+    .partner-item:hover {
+      transform: scale(1.05);
+    }
+    /* Границы внешнего контейнера выкладываем ровно */
+    #partner-carousel {
+      padding: 1rem 0;
+    }
+  </style>
+</section>
     <section class="py-16 px-4 max-w-[1440px] mx-auto">
       <h2 class="text-2xl font-bold text-center mb-12">Преимущества</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -194,7 +235,7 @@
   </p>
   <div class="flex justify-center space-x-4 mb-10">
     <button class="expert-tab w-10 h-10 rounded-full border border-gray-300 text-sm font-semibold hover:bg-gray-200 transition-all" data-page="1">1</button>
-    <button class="expert-tab w-10 h-10 rounded-full border border-gray-300 bg-black text-white text-sm font-semibold" data-page="2">2</button>
+    <button class="expert-tab w-10 h-10 rounded-full border border-gray-300 цbg-black text-white text-sm font-semibold" data-page="2">2</button>
     <button class="expert-tab w-10 h-10 rounded-full border border-gray-300 text-sm font-semibold hover:bg-gray-200 transition-all" data-page="3">3</button>
     <button class="expert-tab w-10 h-10 rounded-full border border-gray-300 text-sm font-semibold hover:bg-gray-200 transition-all" data-page="4">4</button>
     <button class="expert-tab w-10 h-10 rounded-full border border-gray-300 text-sm font-semibold hover:bg-gray-200 transition-all" data-page="5">5</button>
