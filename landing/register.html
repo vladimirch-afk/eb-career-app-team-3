@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Регистрация</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="min-h-screen flex">
+    <!-- Левая часть с иллюстрацией -->
+    <div class="w-1/2 bg-white flex items-center justify-center p-8">
+      <img src="static/img/banner_login.svg" alt="Welcome" class="max-w-full h-auto rounded-lg shadow-lg">
+    </div>
+
+    <!-- Правая часть с формой -->
+    <div class="w-1/2 flex items-center justify-center p-8">
+      <div class="w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6">Регистрация</h2>
+        <form id="register-form" class="space-y-4">
+          <div class="flex space-x-2">
+            <div class="w-1/2">
+              <label class="block text-sm font-medium text-gray-700">Имя</label>
+              <input type="text" id="firstName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+            <div class="w-1/2">
+              <label class="block text-sm font-medium text-gray-700">Фамилия</label>
+              <input type="text" id="lastName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Эл. почта</label>
+            <input type="email" id="username" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Пароль</label>
+            <div class="relative">
+              <input type="password" id="password" class="mt-1 block w-full px-4 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
+                👁️
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-1">Это должна быть комбинация минимум из 8 букв, цифр и символов.</p>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="mr-2">
+            <span class="text-sm text-gray-700">Запомнить меня</span>
+          </div>
+          <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Зарегистрироваться</button>
+        </form>
+
+        <div class="mt-6 flex justify-between space-x-2">
+          <button class="w-1/2 border border-gray-300 py-2 rounded-md flex justify-center items-center hover:bg-gray-50">
+            <img src="https://img.icons8.com/color/16/000000/google-logo.png" class="mr-2" />
+            Log in with Google
+          </button>
+          <button class="w-1/2 border border-gray-300 py-2 rounded-md flex justify-center items-center hover:bg-gray-50">
+            <img src="https://img.icons8.com/ios-filled/16/000000/vk-com.png" class="mr-2" />
+            Log in with VK
+          </button>
+        </div>
+
+        <p class="text-center mt-6 text-sm">
+          Уже есть аккаунт? <a href="login.html" class="text-blue-600 hover:underline">Войти</a>
+        </p>
+        <div class="mt-4">
+          <a href="login.html" class="flex items-center text-sm text-gray-700 hover:underline">
+            <span class="mr-1">←</span> Назад
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("register-form");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const firstName = document.getElementById("firstName").value;
+      const lastName = document.getElementById("lastName").value;
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch("http://localhost:8080/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ firstName, lastName, username, password })
+        });
+
+        if (response.ok) {
+          window.location.href = "login.html"
+          //alert("Пользователь успешно зарегистрирован");
+          // window.location.href = "/login";
+        } else {
+          const message = await response.text();
+          alert("Ошибка регистрации: " + message);
+        }
+      } catch (error) {
+        alert("Ошибка соединения с сервером");
+        console.error(error);
+      }
+    });
+  });
+</script>
+
