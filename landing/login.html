@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Вход</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="min-h-screen flex">
+    <!-- Левая часть с иллюстрацией -->
+    <div class="w-1/2 bg-white flex items-center justify-center p-8">
+      <img src="static/img/banner_login.svg" alt="Welcome" class="max-w-full h-auto rounded-lg shadow-lg">
+    </div>
+
+    <!-- Правая часть с формой -->
+    <div class="w-1/2 flex items-center justify-center p-8">
+      <div class="w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6">Вход</h2>
+        <form class="space-y-4">
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Эл. почта</label>
+            <input type="email" id="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+          </div>
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Пароль</label>
+            <input type="password" id="password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            <p class="text-xs text-gray-500 mt-1">Это должна быть комбинация минимум из 8 букв, цифр и символов.</p>
+          </div>
+          <div class="flex items-center justify-between">
+            <label class="flex items-center">
+              <input type="checkbox" class="mr-2">
+              <span class="text-sm text-gray-700">Запомнить меня</span>
+            </label>
+            <a href="#" class="text-sm text-blue-600 hover:underline">Забыли пароль?</a>
+          </div>
+          <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Войти</button>
+        </form>
+
+        <div class="mt-6 flex justify-between space-x-2">
+          <button class="w-1/2 border border-gray-300 py-2 rounded-md flex justify-center items-center hover:bg-gray-50">
+            <img src="https://img.icons8.com/color/16/000000/google-logo.png" class="mr-2"/>
+            Log in with Google
+          </button>
+          <button class="w-1/2 border border-gray-300 py-2 rounded-md flex justify-center items-center hover:bg-gray-50">
+            <img src="https://img.icons8.com/ios-filled/16/000000/mac-os.png" class="mr-2"/>
+            Log in with Apple
+          </button>
+        </div>
+
+        <p class="text-center mt-6 text-sm">
+          Нет аккаунта? <a href="#" class="text-blue-600 hover:underline">Регистрация</a>
+        </p>
+        <div class="mt-4">
+          <a href="#" class="flex items-center text-sm text-gray-700 hover:underline">
+            <span class="mr-1">←</span> Назад
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

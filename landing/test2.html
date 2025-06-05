@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профориентация</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .circle {
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: fill-circle 1.5s ease-out forwards;
+    }
+    @keyframes fill-circle {
+      to {
+        stroke-dashoffset: 9;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- ХЭДЕР -->
+  <header class="bg-white border-b shadow-sm px-6 py-3 flex justify-between items-center">
+    <div class="flex items-center space-x-10">
+      <div class="flex items-center">
+        <img src="static/img/logo.svg" alt="Work n Progress" class="h-8 w-auto" />
+      </div>
+      <nav class="flex space-x-6 text-sm font-medium">
+        <a href="#" class="text-gray-800 hover:text-blue-600">Пройти тест</a>
+        <a href="#" class="text-gray-800 hover:text-blue-600">Профессии</a>
+        <a href="#" class="text-gray-800 hover:text-blue-600">Таблица лидеров</a>
+        <span class="text-gray-400 cursor-not-allowed">Экспертам</span>
+      </nav>
+    </div>
+    <div class="flex items-center space-x-6 text-sm">
+      <div class="flex items-center space-x-1 border-l pl-4">
+        <img src="https://img.icons8.com/ios/24/000000/wallet--v1.png" class="w-5 h-5" />
+        <span class="font-medium">0.0 ₽</span>
+      </div>
+      <div class="relative">
+        <img src="https://img.icons8.com/ios/24/000000/appointment-reminders--v1.png" class="w-5 h-5" />
+        <span class="absolute -top-1 -right-2 bg-blue-500 text-white text-xs rounded-full px-1.5">9</span>
+      </div>
+      <img src="https://img.icons8.com/ios/24/000000/settings--v1.png" class="w-5 h-5" />
+      <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+        <img src="https://img.icons8.com/ios/24/000000/user--v1.png" class="w-5 h-5" />
+      </div>
+    </div>
+  </header>
+
+  <!-- КОНТЕНТ -->
+  <main class="py-8 px-4">
+    <div class="max-w-7xl mx-auto mb-8 px-4">
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+        Начните изучение профессии с выбора сферы деятельности
+      </h1>
+      <p class="text-gray-500 text-base">
+        Заполните все фильтры, чтобы мы подобрали для вас идеальную область для будущей работы
+      </p>
+    </div>
+
+    <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- ФИЛЬТРЫ -->
+      <aside class="md:col-span-1 bg-white p-6 rounded-lg shadow space-y-6" id="questionnaire">
+        <!-- Здесь будут динамически вставлены вопросы через JS -->
+      </aside>
+
+      <!-- ОБНОВЛЕННЫЙ БЛОК ПРОФЕССИИ -->
+      <section class="md:col-span-2 space-y-6" id="careers-container">
+        <!-- Карточки профессий будут отрисованы через JS -->
+      </section>
+    </div>
+  </main>
+
+<script>
+    const questions = [
+      {
+        title: "Какие способности у вас преобладают?",
+        type: "checkbox",
+        name: "skills",
+        options: [
+          { label: "Логико-математические", value: "engineering" },
+          { label: "Лингвистические", value: "business" },
+          { label: "Пространственное мышление", value: "science" },
+          { label: "Телесно-кинестетические", value: "applied" },
+          { label: "Натуралистические", value: "biology" },
+          { label: "Внутриличностные", value: "creative" }
+        ]
+      },
+      {
+        title: "Какие предметы вам больше всего нравились в школе/вузе?",
+        type: "checkbox",
+        name: "subjects",
+        options: [
+          { label: "Математика, физика", value: "engineering" },
+          { label: "Биология, химия", value: "biology" },
+          { label: "Литература, история", value: "business" },
+          { label: "География, обществознание", value: "science" },
+          { label: "Труд, технология", value: "applied" },
+          { label: "Информатика", value: "engineering" }
+        ]
+      },
+      {
+        title: "Что для вас важно в будущей профессии?",
+        type: "checkbox",
+        name: "importance",
+        options: [
+          { label: "Высокий доход", value: "business" },
+          { label: "Стабильность", value: "biology" },
+          { label: "Помощь людям", value: "biology" },
+          { label: "Возможность удалённой работы", value: "engineering" },
+          { label: "Творческая реализация", value: "creative" },
+          { label: "Карьерный рост", value: "business" }
+        ]
+      },
+      {
+        title: "Какой график вас привлекает?",
+        type: "radio",
+        name: "schedule",
+        options: [
+          { label: "Стабильный 8-часовой день", value: "business" },
+          { label: "Гибкий/удалённый формат", value: "engineering" },
+          { label: "Сменная работа (день/ночь)", value: "applied" },
+          { label: "Сезонная занятость", value: "applied" },
+          { label: "Готов к ненормированному графику", value: "creative" }
+        ]
+      },
+      {
+        title: "Какой уровень подвижности вам нужен?",
+        type: "radio",
+        name: "mobility",
+        options: [
+          { label: "Сидячая работа за компьютером", value: "engineering" },
+          { label: "Умеренная активность (лаборатория, мастерская)", value: "science" },
+          { label: "Высокая нагрузка (стройка, логистика)", value: "applied" },
+          { label: "Неважно, главное — интерес", value: "creative" }
+        ]
+      },
+      {
+        title: "Как вы относитесь к постоянному обучению?",
+        type: "radio",
+        name: "learning",
+        options: [
+          { label: "Хочу осваивать новое каждый день", value: "science" },
+          { label: "Предпочитаю работать по проверенным методам", value: "applied" },
+          { label: "Готов учиться, если это повысит доход", value: "business" },
+          { label: "Учусь только для творческого роста", value: "creative" }
+        ]
+      },
+      {
+        title: "Как часто вы хотите общаться на работе?",
+        type: "radio",
+        name: "communication",
+        options: [
+          { label: "Постоянно (команда, клиенты)", value: "business" },
+          { label: "Редко (индивидуальная работа)", value: "engineering" },
+          { label: "Только с узкими специалистами", value: "science" }
+        ]
+      },
+      {
+        title: "Как вы справляетесь с давлением?",
+        type: "radio",
+        name: "stress",
+        options: [
+          { label: "Люблю адреналин и вызовы", value: "creative" },
+          { label: "Предпочитаю спокойный график", value: "biology" },
+          { label: "Готов к нестандартным ситуациям", value: "engineering" }
+        ]
+      },
+      {
+        title: "Как вы относитесь к технике?",
+        type: "radio",
+        name: "tech",
+        options: [
+          { label: "Хочу работать с последними технологиями", value: "engineering" },
+          { label: "Предпочитаю простые инструменты", value: "applied" },
+          { label: "Использую, но без фанатизма", value: "biology" },
+          { label: "Ненавижу гаджеты", value: "business" }
+        ]
+      }
+    ];
+
+    const professions = [
+      {
+        title: "Техника и инженерия",
+        icon: "🛠️",
+        match: 0,
+        image: "static/img/engineer.svg",
+        description: "Мир техники и инженерии — это пространство для тех, кто любит создавать, конструировать и воплощать идеи в реальные работающие решения.",
+        tags: ["Создают решения", "Проектируют мир", "Работают с технологиями"],
+        color: "blue",
+        weight: ["engineering"],
+        color2: "#3B82F6",
+        count: 13600
+      },
+      {
+        title: "Экономика, управление и бизнес",
+        icon: "💼",
+        match: 0,
+        image: "static/img/economics.svg",
+        description: "Это про деньги, управление и стратегическое мышление. Здесь важно уметь анализировать процессы, принимать решения, влияющие на компании, рынки и целые отраси.",
+        tags: ["Строят стратегии", "Управляют процессами", "Двигают бизнес"],
+        color: "lime",
+        weight: ["business"],
+        color2: "#8BBA13",
+        count: 13600
+      },
+      {
+        title: "Наука, технологии и исследования",
+        icon: "🔬",
+        match: 0,
+        image: "static/img/science.svg",
+        description: "Эта сфера — выбор любознательных...",
+        tags: ["Изучают мир", "Создают будущее", "Открывают знания"],
+        color: "purple",
+        weight: ["science"],
+        color2: "#722ED1",
+        count: 13600
+      },
+      {
+        title: "Креатив и социум",
+        icon: "🎨",
+        match: 0,
+        image: "static/img/art.svg",
+        description: "Креатив и социум — пространство для тех, кто видит мир ярче и хочет влиять на него через идеи, визуальные решения, творчество или работу с людьми.",
+        tags: ["Творят смысл", "Общаются с миром", "Вдохновляют"],
+        color: "orange",
+        weight: ["creative"],
+        color2: "#FA8C16",
+        count: 13600
+      },
+      {
+        title: "Медицина и биология",
+        icon: "🧬",
+        match: 0,
+        image: "static/img/medic.svg",
+        description: "Эта сфера подходит тем, кто стремится заботиться о здоровье людей, лечить болезни, разрабатывать лекарства или изучать процессы, происходящие в организме.",
+        tags: ["Заботятся о жизни", "Изучают организм", "Лечат людей"],
+        color: "green",
+        weight: ["biology"],
+        color2: "#52C41A",
+        count: 13600
+      },
+      {
+        title: "Обслуживающая и прикладная сфера",
+        icon: "🧰",
+        match: 0,
+        image: "static/img/slave.svg",
+        description: "Это про заботу, практичность и помощь в самых разных аспектах жизни. Это работа с сервисами, техникой, ремонтами или обслуживанием людей и процессов.",
+        tags: ["Работают руками", "Делают жизнь удобной", "Всегда на практике"],
+        color: "gray",
+        weight: ["applied"],
+        color2: "#808080",
+        count: 13600
+      }
+    ];
+
+    const questionnaire = document.getElementById("questionnaire");
+    const container = document.getElementById("careers-container");
+
+    function renderQuestions() {
+      questions.forEach(q => {
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = `<h2 class="text-lg font-semibold mb-1">${q.title}</h2>`;
+        q.options.forEach(opt => {
+          const label = document.createElement("label");
+          label.className = "block mb-1";
+          label.innerHTML = `<input type="${q.type}" name="${q.name}" value="${opt.value}" class="mr-2">${opt.label}`;
+          wrapper.appendChild(label);
+        });
+        questionnaire.appendChild(wrapper);
+      });
+    }
+
+    function renderProfessions() {
+    // Сначала отсортируем массив по полю match (по убыванию):
+    const sorted = professions.slice().sort((a, b) => b.match - a.match);
+
+    // Затем для каждой профессии вычислим статус и соберём HTML
+    const cardsHtml = sorted.map((p, index) => {
+      // Определяем текст и цвет для status-бэйджа
+      let statusText = "";
+      let statusClasses = "";
+
+      if (index === 0) {
+        statusText = "🔥 Подходит больше всего";
+        statusClasses = "text-red-600 bg-red-50 border-red-300";
+      } else if (index === 1) {
+        statusText = "🔥 Советуем изучить";
+        statusClasses = "text-yellow-600 bg-yellow-50 <border-yellow></border-yellow>-300";
+      } else if (index === 2 || index === 3) {
+        statusText = "🔥 Может стать вашим хобби";
+        statusClasses = "text-green-600 bg-green-50 border-green-300";
+      } else {
+        // index === 4 или 5
+        statusText = "😊 Ваш потенциал в других сферах";
+        statusClasses = "text-gray-600 bg-gray-50 border-gray-300";
+      }
+
+      // Генерируем HTML одной карточки
+      return `
+        <div class="flex flex-col md:flex-row bg-white rounded-xl shadow p-6 relative w-full max-w-full items-start justify-between">
+          <!-- Левая текстовая часть -->
+          <div class="flex-1 pr-4">
+            <p class="text-sm text-gray-400 mb-2">
+              ${p.count || "–"} человек уже выбрали эту сферу
+            </p>
+            <h3 class="text-2xl font-bold text-gray-900 flex items-center mb-2">
+              ${p.title} <span class="ml-2">${p.icon}</span>
+            </h3>
+            <span class="inline-flex items-center ${statusClasses} rounded-full px-3 py-1 text-sm font-medium mb-3">
+              ${statusText}
+            </span>
+            <p class="text-gray-800 mb-4 leading-relaxed">
+              ${p.description}
+            </p>
+            <div class="flex gap-2 mb-6 flex-nowrap overflow-x-auto">
+              ${p.tags.map(tag => `
+                <span class="text-sm px-4 py-1 border ${p.color2.startsWith("#3B82F6") ? "border-blue-300 text-blue-600" :
+                                                      p.color2.startsWith("#8BBA13") ? "border-lime-300 text-lime-600" :
+                                                      p.color2.startsWith("#FA8C16") ? "border-orange-300 text-orange-600" :
+                                                      p.color2.startsWith("#808080") ? "border-gray-300 text-gray-600" :
+                                                      p.color.startsWith("green") ? "border-green-300 text-green-600" :
+                                                      "border-purple-300 text-purple-600"} bg-white whitespace-nowrap rounded-full">
+                  ${tag}
+                </span>
+              `).join("")}
+            </div>
+            <button class="bg-${p.color}-500 text-white px-5 py-2 rounded hover:bg-${p.color}-600 text-base font-semibold">
+              Смотреть профессии
+            </button>
+          </div>
+
+          <!-- Правая часть: картинка + линия + совпадение -->
+          <div class="flex items-center space-x-6 shrink-0 max-w-full">
+            <img src="${p.image}" alt="Профессия" class="w-40 h-auto" />
+            <div class="h-24 w-px bg-gray-300"></div>
+            <div class="w-32 h-32 relative shrink-0">
+              <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#E5E7EB" stroke-width="4" />
+                <circle cx="18" cy="18" r="15.9155" fill="none" stroke="${p.color2}" stroke-width="3" stroke-linecap="round"
+                  style="stroke-dasharray: 100; stroke-dashoffset: ${100 - p.match}; transition: stroke-dashoffset 0.6s ease;" />
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span class="text-base font-medium text-${p.color}-600">Совпадение</span>
+                <span class="text-3xl font-bold text-${p.color}-600">${p.match}%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    // Вставляем готовые карточки в контейнер
+    container.innerHTML = cardsHtml;
+  }
+
+     function calculateMatches() {
+    // Собираем все выбранные значения
+    const selectedCheckboxes = Array.from(
+      document.querySelectorAll("input[type='checkbox']:checked")
+    ).map(el => el.value);
+    const selectedRadios = Array.from(
+      document.querySelectorAll("input[type='radio']:checked")
+    ).map(el => el.value);
+    const selected = [...selectedCheckboxes, ...selectedRadios];
+
+    // Для каждой профессии считаем, сколько раз её weight встречается в selected
+    professions.forEach(p => {
+      // weight — это массив, например ["engineering"]
+      const count = selected.filter(val => p.weight.includes(val)).length;
+      // Сохраним «сырую» метрику для дальнейшей нормировки
+      p.matchRaw = count;
+    });
+
+    // Находим максимальное значение matchRaw среди всех профессий (чтобы нормировать в проценты)
+    const maxRaw = Math.max(...professions.map(p => p.matchRaw), 0);
+
+    // Если всё оказалось нулевым, тогда оставляем проценты 0, иначе нормируем
+    if (maxRaw === 0) {
+      professions.forEach(p => {
+        p.match = 0;
+      });
+    } else {
+      professions.forEach(p => {
+        p.match = Math.round((p.matchRaw / maxRaw) * 100);
+      });
+    }
+  }
+
+
+    questionnaire.addEventListener("change", () => {
+    calculateMatches();   // ваша функция подсчёта p.match
+    renderProfessions();  // обновлённый рендер с бейджем
+  });
+
+  // Первый вывод на страницу
+  renderQuestions();
+  calculateMatches();
+  renderProfessions();
+</script>
+</body>
+<footer class="bg-gray-900 text-white py-10 px-4 mt-16">
+    <div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
+      <div class="flex items-center space-x-3">
+        <img src="/static/img/logo.svg" alt="Work n Progress" class="h-10">
+      </div>
+      <div class="flex space-x-6 text-sm text-gray-300">
+        <a href="#" class="hover:text-white">Помощь</a>
+        <a href="#" class="hover:text-white">Обратная связь</a>
+        <a href="#" class="hover:text-white">Сотрудничество</a>
+      </div>
+
+      <div class="flex space-x-4">
+        <div class="bg-white rounded-full p-2"><a href="#"><img src="/static/img/vk.svg" alt="VK" class="h-6"></a></div>
+        <div class="bg-white rounded-full p-2"><a href="#"><img src="/static/img/tg.svg" alt="Telegram" class="h-6"></a></div>
+        <div class="bg-white rounded-full p-2"><a href="#"><img src="/static/img/instagram.svg" alt="YouTube" class="h-6"></a></div>
+      </div>
+    </div>
+
+    <div class="mt-6 text-center text-sm text-gray-500">
+      Work n Progress | All rights reserved.
+    </div>
+  </footer>
+</html>
